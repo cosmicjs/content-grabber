@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+     <script src="../js/jq.js"></script>
+
+   
+    <link rel="icon" href="../icon.png">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <script src="../js/myscript.js"></script>
+
+    <script src="../js/popup.js"></script>
+
+    <style>
+
+
+        .floatL {
+            padding-top:3px;
+        }
+
+        html,body {
+            max-height: 800px;
+            /*overflow-y: scroll;*/
+        } 
+        body {
+            width: 400px;
+            overflow-x: visible;
+        }
+        
+        .Content-div{
+            margin: :5px;
+            width:80%;
+            margin:auto;
+        }
+
+
+        
+        
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="extention-loader" style=" position:fixed; width:100%; height:100%; background-color:rgba(255,255,255,0.7); z-index:9999999999" >   
+    <img src="../img/loader.gif" height="50%"  style= " margin:auto; position: absolute; top: 50%; left: 50%;  transform: translate(-50%, -50%); text-align:right; " />
+    </div >
+
+    <div class="Login Content-div" >
+        <form id="loginForm" action="htt://notload.st" >
+            
+            <center><img width="100px" id="logo" style="margin: auto;" src="../img/icon.png" /></center>
+            
+
+            
+            
+           <center><h5 style="color: dodgerblue" > login with cosmicjs account </h5>
+                    <h5 style="color:red" id="massage" ></h5>
+            </center>
+            <div class="col-auto">
+                    <input type="text" class="form-control" autofocus id="email" placeholder="Username/Email" required>
+            </div>
+            <div class="col-auto" style="margin-top: 7px">
+
+                    <input type="password" class="form-control" id="password" placeholder="Password" required>
+
+            </div>
+
+            <div class="col-auto" style="float:right; margin:10px; margin-right:0px;">
+                <input type="submit" class="btn btn-primary " value="Login" />
+            </div>
+            <br />
+        </form>
+
+    </div>
+    
+    
+    <div class="Content Content-div" >
+        <br>
+
+        <center>
+             <a href="https://cosmicjs.com/web-content-extention/objects" target="_blank"   data-toggle="tooltip" data-placement="bottom" title="open Saved Web Content on Cosmic js ">
+            <img width="100px" id="logo" style="margin: auto;" src="../img/icon.png" />
+                 <h3> Web Content Objects <span class="glyphicon glyphicon-triangle-right" ></span></h3> </a>
+        </center>
+       
+        <br>
+        <br>
+        <a id="logout" href="#"  data-toggle="tooltip" data-placement="right" title="logout"  > <span class="glyphicon glyphicon-triangle-left" ></span> logout</a>
+    </div>
+
+    <button class="btn btn-primary " id="try" >try</button>
+    
+   
+
+</body>
+</html>
