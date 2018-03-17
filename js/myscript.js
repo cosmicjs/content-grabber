@@ -59,6 +59,12 @@ function IntPopup(){
         if(login){
             $('.Content').show();  
             GetBukets();
+            $(".save").hide(100);
+            
+            $("#save").click(function(){
+                SaveBuket();
+            });
+
         }
         else{
           $('.Login').show();  
@@ -214,20 +220,33 @@ function CreateOptions(title,slug){
                 ChangeLink();
                 $('#SelectSlug').val(slug);
             }
+            else{
+                $('#bucket-massage').html("Select Bucket to start using the extension");
+            }
+            
                 
             
             $('#SelectSlug').change(function(){
-                    slug=$('#SelectSlug').val();
-                    chrome.storage.local.set({ 'slug': slug }, function () {
-                        ObjectType();
-                        ChangeLink();
-                    });
-
+                    $(".save").show(100);
+                   
             });
         });
     }
     
 }
+
+function SaveBuket(){
+    slug=$('#SelectSlug').val();
+
+    chrome.storage.local.set({ 'slug': slug }, function () {
+        ObjectType();
+        ChangeLink();
+        $(".save").hide(100);
+        $('#bucket-massage').html("");
+    });
+
+}
+
 /*
 function CreateBuket(){
     chrome.storage.local.get('key', function (result) {
@@ -503,6 +522,6 @@ function IntContentScript(){
 function ChangeLink(){
     chrome.storage.local.get('slug', function (result) {
         slug = result.slug;
-        $("#bucket-objects").attr("href","https://cosmicjs.com/"+slug+"/objects/?type=web-content-extention");
+        $("#bucket-objects").attr("href","https://cosmicjs.com/"+slug+"/dashboard");
     });
 }
