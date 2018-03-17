@@ -82,7 +82,7 @@ function Login(email,password){
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     http.onreadystatechange = function () {//Call a function when the state changes.
-        HideLoader(100);
+       // HideLoader(100);
         if (http.readyState == 4 && http.status == 200) {
             response = JSON.parse(http.responseText);
             key=response.token;
@@ -90,7 +90,7 @@ function Login(email,password){
             AddLoginMassage('');
             loginState=1;
             setTimeout(function(){
-                CreateBuket();
+                ActivateLogin();
 
             },100);
             
@@ -483,15 +483,17 @@ function IntContentScript(){
         chrome.storage.local.get('slug', function (result) {
             slug = result.slug;
 
+            if (key &&slug){
+                AddLoader();
+                HideLoader();
+                AddSaveButton();
+                HideButton();
+                GetSelectedText();
+                LoadButtonPosition();
 
-            AddLoader();
-            HideLoader();
-            AddSaveButton();
-            HideButton();
-            GetSelectedText();
-            LoadButtonPosition();
+                setInterval(function () {load(); }, 500);
 
-            setInterval(function () {load(); }, 500);
+            }
 
         });
     });
