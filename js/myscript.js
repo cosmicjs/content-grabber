@@ -5,6 +5,10 @@ var link;
 
 var show=0;
 
+var buckets=Array();
+
+var bucketsSlug=Array();
+
 
 function HideLoader(x){
     $(".extention-loader").hide(x);
@@ -54,6 +58,7 @@ function IntPopup(){
         console.log(login);
         if(login){
             $('.Content').show();  
+            GetBukets();
         }
         else{
           $('.Login').show();  
@@ -115,9 +120,10 @@ function LoginAuthrizedBackground(){
             http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
             http.onreadystatechange = function () {//Call a function when the state changes.
-                HideLoader(100);
+              //  HideLoader(100);
                 if (http.readyState == 4 && http.status == 200) {
                     SaveApiKey(key,email,password);
+                    setTimeout(function(){ActivateLogin();},200);
                 }
                 else{
                     if(!loginState)
@@ -143,7 +149,9 @@ function DeactivateLogin(){
     chrome.storage.local.set({ 'login': 0 }, function () {
         chrome.storage.local.set({ 'key': '' }, function () {
             chrome.storage.local.set({ 'email': '' }, function () {
-                chrome.storage.local.set({ 'password': '' }, function () {location.reload(); });
+                chrome.storage.local.set({ 'password': '' }, function () {
+                    chrome.storage.local.set({ 'slug': '' }, function () {location.reload(); });
+                });
             });
         });
     });
@@ -152,6 +160,75 @@ function DeactivateLogin(){
     
 }
 
+function GetBukets(){
+    chrome.storage.local.get('key', function (result) {
+        key = result.key;
+
+        var http = new XMLHttpRequest();
+        var url = "https://api.cosmicjs.com/v1/buckets";
+        var params = {"title": "web-content-extention"};
+        
+        params = JSON.stringify(params);
+        http.open("GET", url, true);
+        ShowLoader(100);
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Authorization',' Bearer '+key );
+        http.setRequestHeader('Content-type', 'application/json');
+        
+        http.onreadystatechange = function () {//Call a function when the state changes.
+            HideLoader(100);
+            if (http.readyState == 4 && http.status == 200) {
+                response = JSON.parse(http.responseText);
+               // alert(http.responseText);
+                var bucketsResponse=Array();
+                bucketsResponse=response.buckets;
+                for (i=0;i<bucketsResponse.length;i++){
+                    buckets[i]=response.buckets[i].title;
+                    bucketsSlug[i]=response.buckets[i].slug;
+                }
+                CreateOptions(buckets,bucketsSlug)
+                //alert(bucketsSlug);
+
+            }
+           /* else if(http.status == 409)//alerady created
+            {
+                alert(http.responseText);
+
+//              /  ObjectType();
+            }*/
+            
+        }
+        http.send();
+        
+    });
+}
+
+function CreateOptions(title,slug){
+    for(i=0;i<title.length;i++){
+        $('#SelectSlug').append("<option value='"+slug[i]+"' >"+title[i]+"</option>");
+        chrome.storage.local.get('slug', function (result) {
+            slug = result.slug;
+            console.log(slug);
+            if(slug){
+                ChangeLink();
+                $('#SelectSlug').val(slug);
+            }
+                
+            
+            $('#SelectSlug').change(function(){
+                    slug=$('#SelectSlug').val();
+                    chrome.storage.local.set({ 'slug': slug }, function () {
+                        ObjectType();
+                        ChangeLink();
+                    });
+
+            });
+        });
+    }
+    
+}
+/*
 function CreateBuket(){
     chrome.storage.local.get('key', function (result) {
         key = result.key;
@@ -185,65 +262,62 @@ function CreateBuket(){
         http.send(params);
         
     });
-}
+}*/
 
 function ObjectType(){
     chrome.storage.local.get('key', function (result) {
         key = result.key;
+        chrome.storage.local.get('slug', function (result) {
+            slug = result.slug;
 
-        var http = new XMLHttpRequest();
-        var url = "https://api.cosmicjs.com/v1/web-content-extention/add-object-type";
-        var params = {
-                      "title": "web-content-extention",
-                      "singular": "web-content-extention",
-                      "slug": "web-content-extention",
-                      "metafields": [
-                      {
-                          "type": "text",
-                          "title": "title",
-                          "key": "title",
-                          "required": false
-                       },
-                       {
-                          "type": "html-textarea",
-                          "title": "content",
-                          "key": "content",
-                          "required": false
-                       },
-                       {
-                          "type": "text",
-                          "title": "link",
-                          "key": "link",
-                          "required": false
-                        }
-            
-                      ]
-                    };
-        
-        params = JSON.stringify(params);
-        http.open("POST", url, true);
-        ShowLoader(100);
+            var http = new XMLHttpRequest();
+            var url = "https://api.cosmicjs.com/v1/"+slug+"/add-object-type";
+            var params = {
+                          "title": "web-content-extention",
+                          "singular": "web-content-extention",
+                          "slug": "web-content-extention",
+                          "metafields": [
+                          {
+                              "type": "text",
+                              "title": "title",
+                              "key": "title",
+                              "required": false
+                           },
+                           {
+                              "type": "html-textarea",
+                              "title": "content",
+                              "key": "content",
+                              "required": false
+                           },
+                           {
+                              "type": "text",
+                              "title": "link",
+                              "key": "link",
+                              "required": false
+                            }
 
-        //Send the proper header information along with the request
-        http.setRequestHeader('Authorization',' Bearer '+key );
-        http.setRequestHeader('Content-type', 'application/json');
-        
-        http.onreadystatechange = function () {//Call a function when the state changes.
-            HideLoader(100);
-            if (http.readyState == 4 && http.status == 200) {
-                //response = JSON.parse(http.responseText);
-                //alert(http.responseText);
-                ActivateLogin();
+                          ]
+                        };
 
+            params = JSON.stringify(params);
+            http.open("POST", url, true);
+            ShowLoader(100);
+
+            //Send the proper header information along with the request
+            http.setRequestHeader('Authorization',' Bearer '+key );
+            http.setRequestHeader('Content-type', 'application/json');
+
+            http.onreadystatechange = function () {//Call a function when the state changes.
+                HideLoader(100);
+                if (http.readyState == 4 && http.status == 200) {
+                    //response = JSON.parse(http.responseText);
+                    //alert(http.responseText);
+
+                }
 
             }
-            else if(http.status == 409)//alerady created
-            {
-                ActivateLogin();
-            }
-            
-        }
-        http.send(params);
+            http.send(params);
+        });
         
     });
 }
@@ -251,57 +325,59 @@ function ObjectType(){
 function CreateObject(title,content,link){
     chrome.storage.local.get('key', function (result) {
         key = result.key;
-
-        var http = new XMLHttpRequest();
-        var url = "https://api.cosmicjs.com/v1/web-content-extention/add-object";
-        var params = {
-                      "title": title,
-                      "type_slug": "web-content-extention",
-                     "content":content,
-                      "metafields": [
-                        {
-                          "type": "text",
-                          "value": title,
-                          "key": "title",
-                        },
-                        {
-                          "type": "html-textarea",
-                          "value": content,
-                          "key": "content",
-                          
-                        },
-                        {
-                          "type": "text",
-                          "value": link,
-                          "key": "link",
-                        }
-                        
-                      ], 
-                      "options": {
-                        "slug_field": false
-                      }
-                    };
-        
-        params = JSON.stringify(params);
-        http.open("POST", url, true);
-        loaderInc();
-
-        //Send the proper header information along with the request
-        http.setRequestHeader('Authorization',' Bearer '+key );
-        http.setRequestHeader('Content-type', 'application/json');
-        
-        http.onreadystatechange = function () {//Call a function when the state changes.
+        chrome.storage.local.get('slug', function (result) {
+            slug = result.slug;
             
+            var http = new XMLHttpRequest();
+            var url = "https://api.cosmicjs.com/v1/"+slug+"/add-object";
+            var params = {
+                          "title": title,
+                          "type_slug": "web-content-extention",
+                         "content":content,
+                          "metafields": [
+                            {
+                              "type": "text",
+                              "value": title,
+                              "key": "title",
+                            },
+                            {
+                              "type": "html-textarea",
+                              "value": content,
+                              "key": "content",
 
-            if (http.readyState == 4 && http.status == 200) {
-            loaderDec();
+                            },
+                            {
+                              "type": "text",
+                              "value": link,
+                              "key": "link",
+                            }
+
+                          ], 
+                          "options": {
+                            "slug_field": false
+                          }
+                        };
+
+            params = JSON.stringify(params);
+            http.open("POST", url, true);
+            loaderInc();
+
+            //Send the proper header information along with the request
+            http.setRequestHeader('Authorization',' Bearer '+key );
+            http.setRequestHeader('Content-type', 'application/json');
+
+            http.onreadystatechange = function () {//Call a function when the state changes.
+
+
+                if (http.readyState == 4 && http.status == 200) {
+                loaderDec();
+
+                }
+
 
             }
-         
-            
-        }
-        http.send(params);
-        
+            http.send(params);
+        });
     });
 }
 
@@ -399,4 +475,32 @@ function SendToBackground(){
     
     chrome.storage.local.set({ 'params': params }, function () { ShowLoader(100);});
     
+}
+
+function IntContentScript(){
+   chrome.storage.local.get('key', function (result) {
+        key = result.key;
+        chrome.storage.local.get('slug', function (result) {
+            slug = result.slug;
+
+
+            AddLoader();
+            HideLoader();
+            AddSaveButton();
+            HideButton();
+            GetSelectedText();
+            LoadButtonPosition();
+
+            setInterval(function () {load(); }, 500);
+
+        });
+    });
+ 
+}
+
+function ChangeLink(){
+    chrome.storage.local.get('slug', function (result) {
+        slug = result.slug;
+        $("#bucket-objects").attr("href","https://cosmicjs.com/"+slug+"/objects/?type=web-content-extention");
+    });
 }

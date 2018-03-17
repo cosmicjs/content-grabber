@@ -58,7 +58,7 @@
 
             
             
-           <center><h5 style="color: dodgerblue" > login with cosmicjs account </h5>
+           <center><h5 style="color: dodgerblue" > login with Cosmic JS account </h5>
                     <h5 style="color:red" id="massage" ></h5>
             </center>
             <div class="col-auto">
@@ -83,18 +83,24 @@
         <br>
 
         <center>
-             <a href="https://cosmicjs.com/web-content-extention/objects" target="_blank"   data-toggle="tooltip" data-placement="bottom" title="open Saved Web Content on Cosmic js ">
+             <a href="https://cosmicjs.com/" id="bucket-objects" target="_blank"   data-toggle="tooltip" data-placement="bottom" title="open Saved Web Content on Cosmic js ">
             <img width="100px" id="logo" style="margin: auto;" src="../img/icon.png" />
                  <h3> Web Content Objects <span class="glyphicon glyphicon-triangle-right" ></span></h3> </a>
         </center>
        
         <br>
+        <h5> Select Bucket: </h5>
+        <select class="form-control" id="SelectSlug">
+            <option disabled >Select your bucket</option>
+          </select>
         <br>
         <a id="logout" href="#"  data-toggle="tooltip" data-placement="right" title="logout"  > <span class="glyphicon glyphicon-triangle-left" ></span> logout</a>
     </div>
 
     
    <center><br><span>powered by <a href="https://cosmicjs.com/" target="_blank" >Cosmin JS</a></span></center>
+    
+    <a id="try" style="display: none;" >try</a>
 
 </body>
 </html>

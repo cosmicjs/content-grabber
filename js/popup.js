@@ -18,7 +18,7 @@ $(document).ready(function(){
     })
     
     $("#try").click(function(){
-        CreateObject('','','');
+        GetBukets();
     });
     
     $("#logout").click(function(){

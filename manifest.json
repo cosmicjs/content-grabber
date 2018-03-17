@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "web-content-cosmicjs",
-  "description": "Save content from web pages to cosmicjs.",
+  "name": "web content Cosmic JS",
+  "description": "Save content from web pages to Cosmic JS.",
   "version": "1.0",
    "permissions": ["activeTab","storage","https://api.cosmicjs.com/v1/*"],
   "browser_action": {
