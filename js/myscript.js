@@ -243,6 +243,7 @@ function SaveBuket(){
         ChangeLink();
         $(".save").hide(100);
         $('#bucket-massage').html("");
+        $('#bucket-massage-success').html("Bucket selected successfully");
     });
 
 }
@@ -292,9 +293,9 @@ function ObjectType(){
             var http = new XMLHttpRequest();
             var url = "https://api.cosmicjs.com/v1/"+slug+"/add-object-type";
             var params = {
-                          "title": "web-content-extention",
-                          "singular": "web-content-extention",
-                          "slug": "web-content-extention",
+                          "title": "Web Content",
+                          "singular": "Web Content",
+                          "slug": "Web Content",
                           "metafields": [
                           {
                               "type": "text",
@@ -351,7 +352,7 @@ function CreateObject(title,content,link){
             var url = "https://api.cosmicjs.com/v1/"+slug+"/add-object";
             var params = {
                           "title": title,
-                          "type_slug": "web-content-extention",
+                          "type_slug": "Web Content",
                          "content":content,
                           "metafields": [
                             {
