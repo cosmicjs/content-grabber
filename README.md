@@ -20,6 +20,3 @@ How to install unpack chrome extension :
 5-Select the directory containing your unpacked extension
 
 6-Refresh Loaded pages 
-
-
-Check out the other Apps repos for expected quality of README https://cosmicjs.com/apps
