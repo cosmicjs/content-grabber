@@ -6,6 +6,7 @@ chrome extension for scrap web content and save it in cosmic js  buckets
 it is an open source  free to edit  
 
 
+
 How to install unpack chrome extension :
 
 1-Get the source code into your machine by either downloading or cloning the repo, which is located at Download the GitHub repo
@@ -19,5 +20,6 @@ How to install unpack chrome extension :
 5-Select the directory containing your unpacked extension
 
 6-Refresh Loaded pages 
+
 
 Check out the other Apps repos for expected quality of README https://cosmicjs.com/apps
