@@ -1,5 +1,5 @@
 # Web Content Grabber Chrome Extension for Cosmic JS
-![alt text](https://cosmic-s3.imgix.net/bd08e930-2d0e-11e8-b0d2-5b1c0dab7ec2-chrome-cosmicjs.jpg?w=1000)
+![Web Content Grabber Chrome Extension for Cosmic JS](https://cosmic-s3.imgix.net/bd08e930-2d0e-11e8-b0d2-5b1c0dab7ec2-chrome-cosmicjs.jpg?w=1000)
 
 #### Grab and save content from any website to your Cosmic JS Bucket.
 
@@ -29,3 +29,4 @@ git clone https://github.com/cosmicjs/content-grabber
 3. Simply highlight text on any web page and you will see the Cosmic JS logo.  Click the logo, and the highlighted text will be saved as an Object to your Bucket.
 4. Your collected content will now be available in an Object Type titled "Web Content"
 5. Go collect content all over the interwebs and save to Cosmic JS.
+![Web Content Grabber Gif](https://s3-us-west-2.amazonaws.com/cosmicjs/9af745a0-2d20-11e8-b410-6d49a32b39b3-content-grabber.gif)
