@@ -36,7 +36,7 @@ function AddLoader(){
 
 function AddSaveButton(){
     
-    var button='<img class="extention-web-content-button" id="extention-web-content-button" width="40px" id="logo" style="border-radius:50%; background-color:#fff; z-index:9999; cursor:pointer; position:absolute" style="margin: auto;" src='+chrome.extension.getURL("../img/icon.png")+' data-toggle="tooltip" data-placement="bottom" title="Save it on Cosmic js " />'
+    var button='<img class="extention-web-content-button" id="extention-web-content-button" width="40px" id="logo" style="background-color:#fff; z-index:9999; cursor:pointer; position:absolute" style="margin: auto;" src='+chrome.extension.getURL("../img/icon.png")+' data-toggle="tooltip" data-placement="bottom" title="Save it on Cosmic JS" />'
     
     $('body').before(button);
     
