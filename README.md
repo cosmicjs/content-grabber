@@ -28,5 +28,6 @@ git clone https://github.com/cosmicjs/content-grabber
 1. Click the osmic JS icon on the top right of your browser.
 2. Log in and select your Bucket.
 3. Simply highlight text on any web page and you will see the Cosmic JS logo.  Click the logo, and the highlighted text will be saved as an Object to your Bucket.
+4. Your collected content will now be available in an Object Type titled "Web Content"
 
 Collect content all over the interwebs and save for use later!
