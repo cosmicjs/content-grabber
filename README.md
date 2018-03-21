@@ -1,8 +1,7 @@
 # Web Content Grabber Chrome Extension for Cosmic JS
 ![alt text](https://cosmic-s3.imgix.net/bd08e930-2d0e-11e8-b0d2-5b1c0dab7ec2-chrome-cosmicjs.jpg?w=1000)
-Grab and save content from any website to your Cosmic JS Bucket.
 
-### Google Chrome extension for saving web content to Cosmic JS buckets.
+#### Grab and save content from any website to your Cosmic JS Bucket.
 
 ### Getting started
 1. [Sign up for a free Cosmic JS account](https://cosmicjs.com).
